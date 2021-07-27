@@ -6,6 +6,12 @@ TagManager:
   tags:
   - Spider
   - Bullet
+  - GoldBar
+  - TreasureChest
+  - Health
+  - goldText
+  - Shop
+  - Ammo
   layers:
   - Default
   - TransparentFX

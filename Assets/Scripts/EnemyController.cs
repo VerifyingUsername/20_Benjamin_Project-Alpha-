@@ -14,14 +14,19 @@ public class EnemyController : MonoBehaviour
 
     public Rigidbody EnemyRb;
     public Animator EnemyAnimator;
+    public GameObject GoldBarSpawn;
+    public GameObject GoldBarPrefab;
 
-    private bool isDead;
+    private bool isDead = false;
     // Start is called before the first frame update
     void Start()
     {
         Mob = GetComponent<NavMeshAgent>();
         EnemyRb = GetComponent<Rigidbody>();
         EnemyAnimator = GetComponent<Animator>();
+        Player = GameObject.FindGameObjectWithTag("Player");
+
+        Destroy(gameObject, 30);
     }
 
     // Update is called once per frame
@@ -43,21 +48,26 @@ public class EnemyController : MonoBehaviour
         else if (distance > MobDistanceRun)
         {
             EnemyAnimator.SetBool("SpiderRun", false);
-        }
-
-        if(isDead == true)
-        {
-            SceneManager.LoadScene("WinScene");
-        }
+        }       
     }
 
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Bullet")
-        {
-            EnemyAnimator.SetTrigger("isDead");
+        if (collision.gameObject.tag == "Bullet" && isDead == false)
+        {         
             isDead = true;
+            EnemyAnimator.SetTrigger("isDead");
+           
+            Destroy(gameObject, 1.0f);          
+            Destroy(collision.gameObject);
+            Instantiate(GoldBarPrefab, GoldBarSpawn.transform.position, transform.rotation);
+        }
+
+        if (collision.gameObject.tag == "Player")
+        {
+            EnemyAnimator.SetTrigger("isAttack");
         }
     }
+
 }

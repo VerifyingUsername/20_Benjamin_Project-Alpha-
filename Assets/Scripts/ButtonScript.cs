@@ -17,8 +17,28 @@ public class ButtonScript : MonoBehaviour
         
     }
 
+    public void PlayGame()
+    {
+        SceneManager.LoadScene("DesertScene");
+    }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene("Main Menu");
+    }
+
     public void RestartGame()
     {
         SceneManager.LoadScene("DesertScene");
+    }
+
+    public void Instructions()
+    {
+        SceneManager.LoadScene("InstructionsScene");
+    }
+
+    public void StoryButton()
+    {
+        SceneManager.LoadScene("StoryScene");
     }
 }
